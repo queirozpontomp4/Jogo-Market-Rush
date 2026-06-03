@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Rush</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+  <!-- ===================== TELA INICIAL ===================== -->
+  <div id="screen-start" class="screen active">
+    <div class="start-bg"></div>
+    <div class="start-overlay"></div>
+    <div class="start-content">
+      <div class="start-title">
+        <span class="title-market">MARKET</span>
+        <div class="title-divider"></div>
+        <span class="title-rush">RUSH</span>
+      </div>
+      <button id="btn-play" class="btn-play">▶ Play</button>
+    </div>
+  </div>
+ 
+  <!-- ===================== TELA DO JOGO ===================== -->
+  <div id="screen-game" class="screen">
+    <div class="game-bg"></div>
+    <div class="game-overlay"></div>
+ 
+    <!-- TOPO: Cliente + Evento lado a lado (centro) | Score (direita) -->
+    <div class="top-bar">
+ 
+      <!-- PAINEL DO CLIENTE -->
+      <div id="client-panel" class="info-panel client-panel">
+        <div class="panel-tag client-tag">CLIENTE</div>
+        <div id="client-name" class="panel-name">–</div>
+        <div id="client-desc" class="panel-desc">–</div>
+        <div class="panel-attrs">
+          <div class="attr-badge attr-cri">
+            <span id="client-cri" class="attr-val">0</span>
+            <span class="attr-label">CRI</span>
+          </div>
+          <div class="attr-badge attr-est">
+            <span id="client-est" class="attr-val">0</span>
+            <span class="attr-label">EST</span>
+          </div>
+          <div class="attr-badge attr-com">
+            <span id="client-com" class="attr-val">0</span>
+            <span class="attr-label">COM</span>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- SEPARADOR + SÍMBOLO DE "+" -->
+      <div class="top-bar-sep">+</div>
+ 
+      <!-- PAINEL DO EVENTO (fixo no topo após fechar o overlay) -->
+      <div id="event-panel" class="info-panel event-panel">
+        <div class="panel-tag event-tag">EVENTO</div>
+        <div id="event-panel-name" class="panel-name">–</div>
+        <div id="event-panel-desc" class="panel-desc">–</div>
+        <div class="panel-attrs">
+          <div class="attr-badge attr-cri">
+            <span id="event-panel-cri" class="attr-val">0</span>
+            <span class="attr-label">CRI</span>
+          </div>
+          <div class="attr-badge attr-est">
+            <span id="event-panel-est" class="attr-val">0</span>
+            <span class="attr-label">EST</span>
+          </div>
+          <div class="attr-badge attr-com">
+            <span id="event-panel-com" class="attr-val">0</span>
+            <span class="attr-label">COM</span>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+ 
+    <!-- SCORE (topo direito) -->
+    <div id="score-panel" class="score-panel">
+      <div class="score-value"><span id="score">0</span></div>
+      <div class="score-label">Pontos</div>
+    </div>
+ 
+    <!-- EVENTO OVERLAY (aparece no início de cada rodada) -->
+    <div id="event-overlay" class="event-overlay hidden">
+      <div class="event-box">
+        <div class="event-warn">⚠</div>
+        <div class="event-attrs">
+          <div class="attr-badge attr-cri"><span id="event-cri" class="attr-val">0</span><span class="attr-label">CRI</span></div>
+          <div class="attr-badge attr-est"><span id="event-est" class="attr-val">0</span><span class="attr-label">EST</span></div>
+          <div class="attr-badge attr-com"><span id="event-com" class="attr-val">0</span><span class="attr-label">COM</span></div>
+        </div>
+        <div id="event-name" class="event-name">–</div>
+        <div id="event-desc" class="event-desc">–</div>
+        <button id="btn-event-ok" class="btn-event-ok">Entendido!</button>
+      </div>
+    </div>
+ 
+    <!-- FEEDBACK OVERLAY -->
+    <div id="feedback-overlay" class="feedback-overlay hidden">
+      <div class="feedback-box">
+        <div id="feedback-icon" class="feedback-icon">✓</div>
+        <div id="feedback-text" class="feedback-text">+3 Pontos!</div>
+        <div id="feedback-sub" class="feedback-sub">Perfeito!</div>
+      </div>
+    </div>
+ 
+    <!-- ÁREA DAS CARTAS (inferior) -->
+    <div id="cards-area" class="cards-area">
+      <div id="cards-grid" class="cards-grid"></div>
+      <div id="confirm-area" class="confirm-area hidden">
+        <button id="btn-cancel" class="btn-cancel">✕ Cancelar</button>
+        <button id="btn-confirm" class="btn-confirm">✔ Confirmar Escolha</button>
+      </div>
+    </div>
+ 
+    <!-- ATRIBUTOS SELECIONADOS (canto inferior esquerdo) -->
+    <div id="selected-attrs" class="selected-attrs">
+      <div class="sattr-row"><span class="sattr-label">CRI:</span><span id="sel-cri" class="sattr-val">0</span></div>
+      <div class="sattr-row"><span class="sattr-label">EST:</span><span id="sel-est" class="sattr-val">0</span></div>
+      <div class="sattr-row"><span class="sattr-label">COM:</span><span id="sel-com" class="sattr-val">0</span></div>
+    </div>
+ 
+    <!-- TIMER (canto inferior direito) -->
+    <div id="timer-panel" class="timer-panel">
+      <span id="timer-display">03:00</span>
+    </div>
+  </div>
+ 
+  <!-- ===================== TELA FINAL ===================== -->
+  <div id="screen-end" class="screen">
+    <div class="end-bg"></div>
+    <div class="end-overlay"></div>
+    <div class="end-content">
+      <div class="end-trophy" id="end-trophy">🏆</div>
+      <div id="end-rank" class="end-rank">LENDA</div>
+      <div id="end-score-display" class="end-score-display">0 pontos</div>
+      <div class="end-form">
+        <label class="end-label">Nome da Empresa</label>
+        <input id="input-empresa" class="end-input" type="text" placeholder="Ex: Agência Pixel" />
+        <button id="btn-finalizar" class="btn-finalizar">Finalizar</button>
+      </div>
+    </div>
+  </div>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
